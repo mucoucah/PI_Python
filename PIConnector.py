@@ -6,8 +6,10 @@ import PIthon as PIConnect
 #run the values from a list function and the results will be in a csv file.
 
 ## connect to server (connection is read-only)
+#connect to the server using a generic user name and blank password
 PIConnect.connect_to_Server("server_name", "username")  
-
+#connect using windows authentication and similar name and password
+#PIConnect.connect_to_Server2(serverName, username):
 
 ## snapshot data
 # INPUT

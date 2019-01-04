@@ -19,7 +19,7 @@ from System.Net import NetworkCredential
 
 #from System.Collections.Generic import Dictionary
 
-#connect to the server using a generic name
+#connect to the server using a generic user name and blank password
 def connect_to_Server(serverName, username):  
     piServers = PIServers()  
     #piServers = PISystems()  
@@ -27,6 +27,16 @@ def connect_to_Server(serverName, username):
     netcred = NetworkCredential(username,None)
     piServer = piServers[serverName]  
     piServer.Connect(netcred)  
+
+#connect using windows authentication and similar name and password
+def connect_to_Server2(serverName, username):  
+    piServers = PIServers()  
+    #piServers = PISystems()  
+    global piServer  
+    netcred = NetworkCredential(username,username,None)
+    piServer = piServers[serverName]  
+    piServer.Connect(netcred, PIAuthenticationMode.WindowsAuthentication)
+
 
 #get a snapshot of a tag with most recent values  
 def get_tag_snapshot(tagname): 
