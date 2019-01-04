@@ -9,17 +9,20 @@ import csv
 
 # import libraries from pythonnet
 clr.AddReference('OSIsoft.AFSDK') 
+from OSIsoft.AF import *
 from OSIsoft.AF.PI import *  
 from OSIsoft.AF.Search import *  
 from OSIsoft.AF.Asset import *  
 from OSIsoft.AF.Data import *  
 from OSIsoft.AF.Time import * 
 from System.Net import NetworkCredential
+
 #from System.Collections.Generic import Dictionary
 
 #connect to the server using a generic name
 def connect_to_Server(serverName, username):  
     piServers = PIServers()  
+    #piServers = PISystems()  
     global piServer  
     netcred = NetworkCredential(username,None)
     piServer = piServers[serverName]  
@@ -30,7 +33,7 @@ def get_tag_snapshot(tagname):
     print("tag snapshot")
     tag = PIPoint.FindPIPoint(piServer, tagname)  
     lastData = tag.Snapshot()  
-    return lastData.Value, lastData.Timestamp  
+    return print(lastData.Value, lastData.Timestamp)  
 
 #get the recorded values (events) of a tag within a specific time span
 #return "point_values_list.csv"
@@ -104,5 +107,4 @@ def list_of_points(filename, timestart,timeend,interval='1h', compression=False)
         df.to_csv("merged_list.csv")
             
     return df
-
 
